@@ -236,6 +236,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  jekyll (~> 3.6.2)
   jekyll-feed (~> 0.6)
   tzinfo-data
 
