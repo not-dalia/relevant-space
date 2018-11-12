@@ -1,6 +1,7 @@
 <div class="blog-post">
     <div class="post-title"><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></div>
     <div class="post-date">{{ post.date | date: "%b %d, %Y" }}</div>
+    
     <div class="post-content">
         {{ post.content | markdownify }}
     </div>
@@ -9,4 +10,5 @@
             <a href="{{site.baseurl}}/tags?tag={{ tag }}"><i class="fa fa-tag"></i> {{ tag }}</a>
         {% endfor %}
     </div>
+    
 </div>

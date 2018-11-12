@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    font-family: 'Questrial', sans-serif;
+    background: #fff;
+    color: #333; 
+}
+
+#header {
+    padding: 30px 20px;
+    border-top: 6px solid #444;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    background: #f9f9f9;
+}
+
+#header #logo{
+    text-align: center;
+}
+
+#header #logo a {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#header #logo a:after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: #777;
+    transition: 200ms;
+    margin: 0 auto;
+}
+
+#header #logo a:hover:after {
+    width: 100%;
+}
+
+#header #logo a:hover {
+    color: #777;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+}
+
+.blog-post{
+    padding: 20px 20px;
+}
+
+.separater{
+    width: 100%;
+    height: 1px;
+    background: #999;
+    margin: 10px auto;
+}
+
+a {
+    color: #039be5;
+    text-decoration: none;
+    transition: all 0.1s ease-in-out;
+}
+
+a:hover {
+    color: #ff7043;
+    text-decoration: none;
+}
+
+.post-title{
+    font-size: 1.2em; 
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 10px;
+}
+
+
+.post-date, .post-tags{
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8em;
+    color: #777;
+    width: 100%;
+}
+
+.post-tags a{
+    display: inline-block;
+    background: #039be5;
+    border-radius: 30px;
+    padding: 5px 10px 8px 10px;
+    color: #fff;
+    font-size: 0.95em;
+}
+
+.post-tags a:hover{
+    display: inline-block;
+    background: #ff7043;
+    text-decoration: none;
+}
+
+.post-content blockquote {
+    border-left: 3px solid #ffab91;
+    margin: 0;
+    margin: 1em 0;
+    padding: 0 20px;
+    line-height: 1.4em;
+}
