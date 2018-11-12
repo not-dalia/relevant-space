@@ -150,14 +150,14 @@ a:hover {
 }
 
 .tag-title {
-    padding: 10px 20px;
+    padding: 10px 20px 3px 20px;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #ddd;
     font-family: 'Raleway', sans-serif;
     color: #555;
     position: sticky;
     background: #fff;
-    top: 42px;
+    top: 46px;
 }
 
 .tag-title-container {
