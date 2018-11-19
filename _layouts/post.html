@@ -29,11 +29,11 @@ layout: default
         <div class="comment-name">
           —
           {% if item.email %}
-          <a href="mailto:{{ item.email | xml_escape }}">
+          <a href="mailto:{{ item.email | xml_escape }}" style="text-transform: none;">
             {{ item.name | xml_escape }}
           </a>
           {% else %}
-          <a>
+          <a style="text-transform: none;">
             {{ item.name | xml_escape }}
           </a>
           {% endif %}
