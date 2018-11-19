@@ -97,6 +97,7 @@ assign postNameClean = postName | split: "." %}
     codeBlock[i].innerText = codeBlock[i].innerText.replace(/&lt;/g, "<");
   }
 
+  var tds = new TurndownService()
   console.log("{{ postNameClean.first }}");
 
   $("button.quote").on("click", function() {
@@ -108,10 +109,10 @@ assign postNameClean = postName | split: "." %}
 
     console.log($(this).attr("data-quote"));
     var quoteText =
-      "> " +
-      $("#" + $(this).attr("data-quote"))
-        .text()
-        .trim() +
+      
+      tds.turndown('<blockquote>' + $("#" + $(this).attr("data-quote"))
+        .html()
+        .trim() + '</blockquote>') +
       "\n";
     if (cursorStart != 0) quoteText = '\n' + quoteText;
     $("#comment-area").val(textBefore + quoteText + textAfter);
