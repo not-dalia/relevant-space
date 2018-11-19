@@ -43,7 +43,7 @@ layout: default
     </div>
     {% endif %} {% endfor %}
 
-    <div class="add-comment-section">
+    <form class="add-comment-section" onsubmit="submitComment(); return false;">
       <div class="add-comment-title">Add Comment</div>
       <div class="comment-info">
         NOTE: Your name and email will be displayed publicly.
@@ -76,11 +76,11 @@ layout: default
       <button
         class="comment-submit"
         id="comment-submit"
-        onclick="submitComment()"
+        type="submit"
       >
         Send Comment
       </button>
-    </div>
+    </form>
   </div>
 </div>
 
@@ -151,7 +151,7 @@ assign postNameClean = postName | split: "." %}
         })
         .fail(function(data) {
           console.log(data);
-          commentSubmitted("Failed to get comments file");
+          commentSubmitted("Failed to post comment.");
         });
     } catch (err) {
       commentSubmitted("Failed to post comment: " + err.message);
