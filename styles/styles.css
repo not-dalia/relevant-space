@@ -247,6 +247,7 @@ blockquote {
     font-size: 0.85em;
     color: #555;
     text-transform: uppercase;
+    align-items: center;
 }
 
 .comment-metadata .comment-date{
