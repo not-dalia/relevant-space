@@ -113,7 +113,7 @@ assign postNameClean = postName | split: "." %}
       tds.turndown('<blockquote>' + $("#" + $(this).attr("data-quote"))
         .html()
         .trim() + '</blockquote>') +
-      "\n";
+      "\n\n";
     if (cursorStart != 0) quoteText = '\n' + quoteText;
     $("#comment-area").val(textBefore + quoteText + textAfter);
     $("#comment-area").focus();
