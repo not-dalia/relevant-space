@@ -20,17 +20,19 @@ layout: default
   <div class="comment-section">
     <div class="title"><h2>Comments</h2></div>
 
-    {% for item in site.comments %} 
-    {% if item.ref == post.id %} 
+    {% for item in site.comments %} {% if item.ref == post.id %}
     <div class="comment-item">
       <div class="comment-text">
         {{ item.comment | xml_escape | replace: "&gt;", ">" | markdownify}}
       </div>
       <div class="comment-metadata">
         <div class="comment-name">
-          — <a href="mailto:{{ item.email }}"> {{ item.name }} </a>
+          —
+          <a href="mailto:{{ item.email | xml_escape }}">
+            {{ item.name | xml_escape }}
+          </a>
         </div>
-        <div class="comment-date">{{ item.date }}</div>
+        <div class="comment-date">{{ item.date | xml_escape }}</div>
       </div>
     </div>
     {% endif %} {% endfor %}
@@ -40,6 +42,7 @@ layout: default
       <div class="comment-info">
         NOTE: Your name and email will be displayed publicly.
       </div>
+      <div class="comment-info" id="comment-error"></div>
       <textarea
         placeholder="Write your comment here..."
         name="comment-area"
@@ -63,10 +66,19 @@ layout: default
           style="border-radius: 0 0 0 2px"
         />
       </div>
-      <button class="comment-submit" id="comment-submit" onclick="submitComment()">Send Comment</button>
+      <button
+        class="comment-submit"
+        id="comment-submit"
+        onclick="submitComment()"
+      >
+        Send Comment
+      </button>
     </div>
   </div>
 </div>
+
+{% assign path = post.path | split: "/" %} {% assign postName = path.last %} {%
+assign postNameClean = postName | split: "." %}
 
 <script>
   var codeBlock = document.getElementsByTagName("code");
@@ -75,13 +87,80 @@ layout: default
     codeBlock[i].innerText = codeBlock[i].innerText.replace(/&lt;/g, "<");
   }
 
+  console.log("{{ postNameClean.first }}");
+
   function submitComment() {
-    var jqxhr = $.get("http://localhost:3123/repos/not-dalia/relevant-space/contents/about.md")
-      .done(function(data) {
-        console.log(data);
+    try {
+      $("#comment-error").hide();
+      $("#comment-error").text("");
+      $("#comment-submit").prop("disabled", true);
+      $("#comment-area").prop("disabled", true);
+      $("#comment-name").prop("disabled", true);
+      $("#comment-email").prop("disabled", true);
+
+      var commentText = $("#comment-area")
+        .val()
+        .trim();
+      var commentName = $("#comment-name")
+        .val()
+        .trim();
+      var commentEmail = $("#comment-email").val();
+
+      if (!commentText || !commentName) {
+        throw new Error("Please fill in your name and comment");
+      }
+      var commentData = {
+        ref: "{{ post.id }}",
+        title: "{{ post.title }}",
+        name: commentName,
+        date: new Date().toISOString(),
+        comment: commentText
+      };
+      if (commentEmail) commentData.email = commentEmail;
+      var yamlData = jsyaml.safeDump(commentData);
+
+      var commentCommit = {
+        message: "New comment added by " + commentName,
+        content: "---\n" + yamlData + "\n---",
+        branch: "gh-pages"
+      };
+      console.log();
+      commentSubmitted();
+
+      var putComment = $.ajax({
+        url:
+          "http://localhost:3123/repos/not-dalia/relevant-space/contents/{{ postNameClean }}/_comments/{{ postNameClean }}" +
+          Date.now() +
+          ".md",
+        method: "PUT",
+        data: JSON.stringify(commentCommit),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
       })
-      .fail(function(data) {
-        console.log(data);
-      });
+        .done(function(data) {
+          data;
+        })
+        .fail(function(data) {
+          console.log(data);
+          commentSubmitted("Failed to get comments file");
+        });
+    } catch (err) {
+      commentSubmitted("Failed to post comment: " + err.message);
+    }
+  }
+
+  function commentSubmitted(error) {
+    $("#comment-submit").prop("disabled", false);
+    $("#comment-area").prop("disabled", false);
+    $("#comment-name").prop("disabled", false);
+    $("#comment-email").prop("disabled", false);
+
+    if (error) {
+      $("#comment-error").show();
+      $("#comment-error").text(error);
+    } else {
+      $("#comment-error").hide();
+      $("#comment-error").text("");
+    }
   }
 </script>
