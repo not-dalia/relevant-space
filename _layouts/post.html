@@ -135,7 +135,7 @@ assign postNameClean = postName | split: "." %}
       };
       var requestOptions = {
         url:
-          "http://relevant-forwarder.herokuapp.com/repos/not-dalia/relevant-space/contents/_comments/{{ postNameClean.first }}/{{ postNameClean.first }}" +
+          "//relevant-forwarder.herokuapp.com/repos/not-dalia/relevant-space/contents/_comments/{{ postNameClean.first }}/{{ postNameClean.first }}" +
           Date.now() +
           ".md",
         type: "PUT",
