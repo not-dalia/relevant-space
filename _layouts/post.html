@@ -43,6 +43,7 @@ layout: default
         NOTE: Your name and email will be displayed publicly.
       </div>
       <div class="comment-info" id="comment-error"></div>
+      <div class="comment-info" id="comment-success"></div>
       <textarea
         placeholder="Write your comment here..."
         name="comment-area"
@@ -93,6 +94,8 @@ assign postNameClean = postName | split: "." %}
     try {
       $("#comment-error").hide();
       $("#comment-error").text("");
+      $("#comment-success").hide();
+      $("#comment-success").text("");
       $("#comment-submit").prop("disabled", true);
       $("#comment-area").prop("disabled", true);
       $("#comment-name").prop("disabled", true);
@@ -121,24 +124,24 @@ assign postNameClean = postName | split: "." %}
 
       var commentCommit = {
         message: "New comment added by " + commentName,
-        content: "---\n" + yamlData + "\n---",
+        content: b64EncodeUnicode("---\n" + yamlData + "\n---"),
         branch: "gh-pages"
       };
-      console.log();
-      commentSubmitted();
-
-      var putComment = $.ajax({
+      var requestOptions = {
         url:
-          "http://localhost:3123/repos/not-dalia/relevant-space/contents/{{ postNameClean }}/_comments/{{ postNameClean }}" +
+          "http://localhost:3123/repos/not-dalia/relevant-space/contents/_comments/{{ postNameClean.first }}/{{ postNameClean.first }}" +
           Date.now() +
           ".md",
-        method: "PUT",
+        type: "PUT",
         data: JSON.stringify(commentCommit),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
-      })
+      };
+      console.log(requestOptions);
+
+      var putComment = $.ajax(requestOptions)
         .done(function(data) {
-          data;
+          commentSubmitted();
         })
         .fail(function(data) {
           console.log(data);
@@ -161,6 +164,21 @@ assign postNameClean = postName | split: "." %}
     } else {
       $("#comment-error").hide();
       $("#comment-error").text("");
+      $("#comment-success").show();
+      $("#comment-success").text("Your comment was posted successfully. It might take a minute or two to appear.");
+      $("#comment-area").val('');
+      $("#comment-name").val('');
+      $("#comment-email").val('');
     }
   }
+
+  function b64EncodeUnicode(str) {
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function toSolidBytes(match, p1) {
+            return String.fromCharCode('0x' + p1);
+    }));
+}
 </script>

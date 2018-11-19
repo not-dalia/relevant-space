@@ -320,6 +320,13 @@ blockquote {
     margin-top: 2px;
 }
 
+.comment-info#comment-success{
+    background: #DCEDC8;
+    border-left: 5px solid #4CAF50;
+    display: none;
+    margin-top: 2px;
+}
+
 .highlight pre{
     /* padding: 10px; */
 }
