@@ -22,23 +22,30 @@ layout: default
 
     {% for item in site.comments %} {% if item.ref == post.id %}
     <div class="comment-item">
-      <div class="comment-text">
+      <div class="comment-text" id="comment-{{forloop.index}}">
         {{ item.comment | xml_escape | replace: "&gt;", ">" | markdownify}}
       </div>
       <div class="comment-metadata">
         <div class="comment-name">
-          —
-          {% if item.email %}
-          <a href="mailto:{{ item.email | xml_escape }}" style="text-transform: none;">
+          — {% if item.email %}
+          <a
+            href="mailto:{{ item.email | xml_escape }}"
+            style="text-transform: none;"
+          >
             {{ item.name | xml_escape }}
           </a>
           {% else %}
-          <a style="text-transform: none;">
-            {{ item.name | xml_escape }}
-          </a>
-          {% endif %}
+          <a style="text-transform: none;"> {{ item.name | xml_escape }} </a> {%
+          endif %}
         </div>
-        <div class="comment-date">{{ item.date | xml_escape }}</div>
+        <div class="comment-date">
+          {{ item.date | xml_escape }}
+          <span
+            ><button class="quote" data-quote="comment-{{ forloop.index }}">
+              Quote
+            </button></span
+          >
+        </div>
       </div>
     </div>
     {% endif %} {% endfor %}
@@ -73,11 +80,7 @@ layout: default
           style="border-radius: 0 0 0 2px"
         />
       </div>
-      <button
-        class="comment-submit"
-        id="comment-submit"
-        type="submit"
-      >
+      <button class="comment-submit" id="comment-submit" type="submit">
         Send Comment
       </button>
     </form>
@@ -95,6 +98,27 @@ assign postNameClean = postName | split: "." %}
   }
 
   console.log("{{ postNameClean.first }}");
+
+  $("button.quote").on("click", function() {
+    var cursorStart = $("#comment-area").prop("selectionStart");
+    var cursorEnd = $("#comment-area").prop("selectionEnd");
+    var v = $("#comment-area").val();
+    var textBefore = v.substring(0, cursorStart);
+    var textAfter = v.substring(cursorEnd, v.length);
+
+    console.log($(this).attr("data-quote"));
+    var quoteText =
+      "> " +
+      $("#" + $(this).attr("data-quote"))
+        .text()
+        .trim() +
+      "\n";
+    if (cursorStart != 0) quoteText = '\n' + quoteText;
+    $("#comment-area").val(textBefore + quoteText + textAfter);
+    $("#comment-area").focus();
+    $("#comment-area").prop("selectionStart", cursorEnd + quoteText.length);
+    $("#comment-area").prop("selectionEnd", cursorEnd + quoteText.length);
+  });
 
   function submitComment() {
     try {
@@ -171,10 +195,12 @@ assign postNameClean = postName | split: "." %}
       $("#comment-error").hide();
       $("#comment-error").text("");
       $("#comment-success").show();
-      $("#comment-success").text("Your comment was posted successfully. It might take a minute or two to appear.");
-      $("#comment-area").val('');
-      $("#comment-name").val('');
-      $("#comment-email").val('');
+      $("#comment-success").text(
+        "Your comment was posted successfully. It might take a minute or two to appear."
+      );
+      $("#comment-area").val("");
+      $("#comment-name").val("");
+      $("#comment-email").val("");
     }
   }
 
@@ -182,9 +208,13 @@ assign postNameClean = postName | split: "." %}
     // first we use encodeURIComponent to get percent-encoded UTF-8,
     // then we convert the percent encodings into raw bytes which
     // can be fed into btoa.
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-        function toSolidBytes(match, p1) {
-            return String.fromCharCode('0x' + p1);
-    }));
-}
+    return btoa(
+      encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function toSolidBytes(
+        match,
+        p1
+      ) {
+        return String.fromCharCode("0x" + p1);
+      })
+    );
+  }
 </script>

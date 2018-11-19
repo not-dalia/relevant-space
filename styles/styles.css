@@ -253,6 +253,21 @@ blockquote {
     color: #868686;
 }
 
+.comment-metadata button {
+    background: #FF8A65;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: #fff;
+    padding: 2px 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.comment-metadata button:hover {
+    background: #039be5;
+}
+
 .add-comment-section{
     display: flex;
     flex-direction: row;
