@@ -28,9 +28,15 @@ layout: default
       <div class="comment-metadata">
         <div class="comment-name">
           —
+          {% if item.email %}
           <a href="mailto:{{ item.email | xml_escape }}">
             {{ item.name | xml_escape }}
           </a>
+          {% else %}
+          <a>
+            {{ item.name | xml_escape }}
+          </a>
+          {% endif %}
         </div>
         <div class="comment-date">{{ item.date | xml_escape }}</div>
       </div>
@@ -129,7 +135,7 @@ assign postNameClean = postName | split: "." %}
       };
       var requestOptions = {
         url:
-          "http://localhost:3123/repos/not-dalia/relevant-space/contents/_comments/{{ postNameClean.first }}/{{ postNameClean.first }}" +
+          "http://relevant-forwarder.herokuapp.com/repos/not-dalia/relevant-space/contents/_comments/{{ postNameClean.first }}/{{ postNameClean.first }}" +
           Date.now() +
           ".md",
         type: "PUT",
