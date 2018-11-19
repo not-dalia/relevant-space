@@ -22,6 +22,10 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: not_dalia
 github_username:  not-dalia
 
+permalink: /:year/:month/:day/:title/
+collections:
+  comments:
+    output: false
 # Build settings
 markdown: kramdown
 plugins:

@@ -1,7 +1,87 @@
 ---
 layout: default
 ---
+
 {% assign post=page %}
 <div class="post-page">
-{% include post.html %}
+  {% include post.html %}
+
+  <div class="other-posts blog-post">
+    {% if post.previous %}
+    <div class="left prev-post">
+      <a href="{{site.baseurl}}{{post.previous.url}}"> Previous Post</a>
+    </div>
+    {% endif %} {% if post.next %}
+    <div class="right next-post">
+      <a href="{{site.baseurl}}{{post.next.url}}"> Next Post</a>
+    </div>
+    {% endif %}
+  </div>
+  <div class="comment-section">
+    <div class="title"><h2>Comments</h2></div>
+
+    {% for item in site.comments %} 
+    {% if item.ref == post.id %} 
+    <div class="comment-item">
+      <div class="comment-text">
+        {{ item.comment | xml_escape | replace: "&gt;", ">" | markdownify}}
+      </div>
+      <div class="comment-metadata">
+        <div class="comment-name">
+          — <a href="mailto:{{ item.email }}"> {{ item.name }} </a>
+        </div>
+        <div class="comment-date">{{ item.date }}</div>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
+
+    <div class="add-comment-section">
+      <div class="add-comment-title">Add Comment</div>
+      <div class="comment-info">
+        NOTE: Your name and email will be displayed publicly.
+      </div>
+      <textarea
+        placeholder="Write your comment here..."
+        name="comment-area"
+        id="comment-area"
+        cols="30"
+        rows="10"
+        class="comment-area"
+      ></textarea>
+      <div class="comment-data">
+        <input
+          type="text"
+          name="comment-name"
+          id="comment-name"
+          placeholder="Name..."
+        />
+        <input
+          type="text"
+          name="comment-email"
+          id="comment-email"
+          placeholder="Email..."
+          style="border-radius: 0 0 0 2px"
+        />
+      </div>
+      <button class="comment-submit" id="comment-submit" onclick="submitComment()">Send Comment</button>
+    </div>
+  </div>
 </div>
+
+<script>
+  var codeBlock = document.getElementsByTagName("code");
+  console.log(codeBlock);
+  for (var i = 0; i < codeBlock.length; i++) {
+    codeBlock[i].innerText = codeBlock[i].innerText.replace(/&lt;/g, "<");
+  }
+
+  function submitComment() {
+    var jqxhr = $.get("http://localhost:3123/repos/not-dalia/relevant-space/contents/about.md")
+      .done(function(data) {
+        console.log(data);
+      })
+      .fail(function(data) {
+        console.log(data);
+      });
+  }
+</script>

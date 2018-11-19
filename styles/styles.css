@@ -102,7 +102,7 @@ h6 {
 .separater {
     width: 100%;
     height: 1px;
-    background: #999;
+    background: #ccc;
     margin: 10px auto;
 }
 
@@ -146,7 +146,7 @@ a:hover {
     text-decoration: none;
 }
 
-.post-content blockquote {
+blockquote {
     border-left: 3px solid #ffab91;
     margin: 0;
     margin: 1em 0;
@@ -181,3 +181,136 @@ a:hover {
 }
 
 .container {}
+
+.other-posts{
+    border-top: 1px solid #ddd;
+    padding: 5px 20px;
+}
+
+.other-posts>div{
+    width: 48%;
+}
+
+.other-posts::after{
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.right{
+    float: right;
+    text-align: right;
+}
+
+.left {
+    float: left;
+    text-align: left;
+}
+
+.comment-section{
+    border-top: 1px solid #ddd;
+    padding: 5px 20px 20px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.comment-section h2{
+    color:  #ff7043;
+}
+
+.comment-item{
+    border: 1px dashed #ddd;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-item .comment-text{
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.4em;
+}
+
+.comment-item .comment-text p{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.comment-item .comment-metadata{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+    background: #f4f4f4;
+    padding: 5px;
+    font-size: 0.85em;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.comment-metadata .comment-date{
+    color: #868686;
+}
+
+.add-comment-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.add-comment-section .add-comment-title{
+    color:  #ff7043;
+    font-family: 'Raleway', sans-serif;
+    padding: 5px;
+    margin-bottom: 2px;
+    font-size: 1.2em;
+}
+
+.comment-submit{
+    flex: 0.25;
+    background: #039be5;
+    border: none;
+    color: white;
+    border-radius: 0 0 2px 0;
+}
+
+.comment-data {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 0.75;
+}
+
+.comment-data input {
+    flex: 1;
+    margin: 0px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-style: groove;
+}
+
+.comment-area {
+    border-radius: 2px 2px 0 0;
+    flex: 1;
+    /* flex-grow: 1; */
+    border: 1px groove #eee;
+    padding: 10px;
+    flex-basis: 100%;
+}
+
+.comment-info{
+    flex: 1;
+    flex-basis: 100%;
+    padding: 5px;
+    background: #FFF3E0;
+    color: #222;
+    border-left: 5px solid #F57C00;
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+
+.highlight pre{
+    /* padding: 10px; */
+}

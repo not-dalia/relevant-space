@@ -25,6 +25,7 @@ layout: default
     /*
         {% capture postLayout%}
             {% include post.html %}
+
         {% endcapture %}
     */
     document.querySelector('#selected-tag').innerText = queryObj.tag;
@@ -46,6 +47,13 @@ layout: default
             blogCont.querySelector('.post-tags').innerHTML = tags.join(' ');
 
             cont.appendChild(blogCont);
+            cont.appendChild(getSeparator());
         }
+    }
+
+    function getSeparator(){
+        let n = document.createElement('div');
+        n.className = 'separater';
+        return n;
     }
 </script>
