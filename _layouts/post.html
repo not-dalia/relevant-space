@@ -39,7 +39,7 @@ layout: default
           endif %}
         </div>
         <div class="comment-date">
-          {{ item.date | xml_escape }}
+          {{ item.date | date: "%e %b %Y @ %l:%M %p" | xml_escape }}
           <span
             ><button class="quote" data-quote="comment-{{ forloop.index }}">
               Quote
