@@ -6,6 +6,10 @@ body {
     min-width: 320px;
 }
 
+.highlighter-rouge{
+    color: #ff5722;
+}
+
 #header {
     padding: 40px 20px 0px 30px;
     border-top: 6px solid #555;
