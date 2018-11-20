@@ -90,6 +90,6 @@ When I considered using commits for adding comments, I thought that it would pro
 
 
 ### Final thoughts
-I can't say I'm anywhere near a good developer, and while trying to implement this, I made a lot of mistakes but I also learnt quite a lot of things. This really was the point of this blog; a sort of training dungeon where I can experiment both with code and practice writing posts. I can't say I'm satisfied with how the comments work right now (mainly because of the caching problem), but I'm happy with the outcome despite all the flaws in my plan and implementation.
+I can't say I'm anywhere near a good developer, and while trying to implement this, I made a lot of mistakes but I also learnt quite a lot of things. This really was the point of this blog; a sort of training dungeon where I can both experiment with code and practice writing posts. I can't say I'm satisfied with how the comments work right now (mainly because of the caching problem), but I'm happy with the outcome despite all the flaws in my plan and implementation.
 
 
