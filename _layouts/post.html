@@ -94,7 +94,7 @@ assign postNameClean = postName | split: "." %}
   var codeBlock = document.getElementsByTagName("code");
   console.log(codeBlock);
   for (var i = 0; i < codeBlock.length; i++) {
-    codeBlock[i].innerText = codeBlock[i].innerText.replace(/&lt;/g, "<");
+    codeBlock[i].innerText = codeBlock[i].innerText.replace(/&amp;&lt;/g, "<");
   }
 
   var tds = new TurndownService()
