@@ -53,7 +53,7 @@ Once I started implementing this idea, I came across a number of issues. The fir
 {{ item.comment | xml_escape | replace: "&gt;", ">" | markdownify}} 
 {% endraw%}
 {% endhighlight %}
-So basically since `xml_escape` escapes tags by replacing `<` and `>` with `&lt;` and `&gt;` respectfully, this replaced all occurences of `&gt;` back to `>` before rendering the markdown, successfully rendering blockquotes. However, this messed up rendering code blocks since all `<` occurences ended up showing as `&lt;`. I fixed this using an even uglier hack: 
+So basically since `xml_escape` escapes tags by replacing `<` and `>` with `&lt;` and `&gt;` respectively, this replaced all occurences of `&gt;` back to `>` before rendering the markdown, successfully rendering blockquotes. However, this messed up rendering code blocks since all `<` occurences ended up showing as `&lt;`. I fixed this using an even uglier hack: 
 {% highlight html javascript%}
   <script>
     var codeBlock = document.getElementsByTagName("code");
