@@ -30,7 +30,7 @@ When I was creating the theme for this blog, I thought that I'd add a comment se
       ---
     ```
     I chose to put the comment content in a `comment` field rather than to be the main content because I was experimenting with keeping all the comments relevant to one post in one file, but I later decided to break it down to a single file per comment since it makes it easier to find and archive comments if needed.
-  - When someone posts a new comment, the comment file is generated client-side and committed to the blog's repo using (GitHub Contents API)[https://developer.github.com/v3/repos/contents/]. 
+  - When someone posts a new comment, the comment file is generated client-side and committed to the blog's repo using [GitHub Contents API](https://developer.github.com/v3/repos/contents/). 
   - In `post` layout, look for and render all comments that have a `ref` field that matches the `post.id`. Example:
     {% highlight html %}
     {% raw %}
