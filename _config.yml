@@ -17,7 +17,7 @@ title: Relevenat Space
 email: dalia.alshahrabi@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   A personal space for random thoughts and bookmarking interesting things.
-baseurl: "/relevant-space" # the subpath of your site, e.g. /blog
+baseurl: "/" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: not_dalia
 github_username:  not-dalia
