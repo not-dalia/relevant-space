@@ -351,3 +351,7 @@ blockquote {
 .highlight pre{
     /* padding: 10px; */
 }
+
+code {
+    white-space: pre-wrap
+}
