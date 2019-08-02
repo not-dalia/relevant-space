@@ -298,7 +298,7 @@ lang: en
         </div>
       </div>
       <div class="row">
-        <label>Animation delay (seconds)</label>
+        <label>Animation delay</label>
         <div class="input">
           <input id="anim-delay" type="number" value="0.25">
         </div>
@@ -309,7 +309,7 @@ lang: en
         </div>
       </div>
       <div class="row">
-        <label>Animation length (seconds)</label>
+        <label>Animation length</label>
         <div class="input">
           <input id="anim-length" type="number" value="4">
         </div>
@@ -434,6 +434,7 @@ lang: en
     function changeCircleCount() {
       var circleCount = $('#circ-count').val();
       if (circleCount < 0) circleCount = 0;
+      var animationName = $('.c').css('animation-name');
       var state = $('.c').css('animation-play-state');
       var duration = $('.c').css('animation-duration');
       $('#circles').empty();
@@ -461,7 +462,8 @@ lang: en
             'animation-delay': i * $('#anim-delay').val() + 's',
             'animation-play-state': state,
             'animation-duration': duration,
-            'animation-timing-function': $('#ease-type').val()
+            'animation-timing-function': $('#ease-type').val(),
+            'animation-name': animationName
           }
         });
 
