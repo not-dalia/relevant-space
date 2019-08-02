@@ -330,6 +330,11 @@ lang: en
         <input id="anim-start" type="button" value="Start Animation">
         <input id="anim-pause" type="button" value="Pause / Resume">
       </div>
+      <div class="row small">
+        <div class="explanation">
+          Note: If you're using IE or Edge, you will need to stop and start the animation after changing the values for them to apply.
+        </div>
+      </div>
     </div>
     <div class="share-row">
       <div class="row">
@@ -436,7 +441,7 @@ lang: en
       if (circleCount < 0) circleCount = 0;
       var animationName = $('.c').css('animation-name');
       var state = $('.c').css('animation-play-state');
-      var duration = $('.c').css('animation-duration');
+      var duration = $('#anim-length').val() + 's';
       $('#circles').empty();
       $('.lines').empty();
       var seperationDegrees = 180 / circleCount;
