@@ -97,6 +97,14 @@ lang: en
       align-items: center;
     }
 
+    .explanation {
+      font-size: 10pt;
+      padding: 0 5px;
+      margin-bottom: 10px;
+      margin-top: -5px;
+      color: #ffe082;
+    }
+
     .input {
       flex: 1;
       text-align: right;
@@ -139,6 +147,7 @@ lang: en
     .row input[type=number],
     .row select {
       width: 200px;
+      box-sizing: border-box;
     }
 
     #share-link {
@@ -152,19 +161,19 @@ lang: en
       display: flex;
     }
 
-    #share-group input{
+    #share-group input {
       height: 30px;
       padding: 5px;
       box-sizing: content-box;
       flex: 1;
     }
 
-    #share-group input[type=text]{
+    #share-group input[type=text] {
       background: #efefef;
       color: #222;
     }
 
-    #share-group input[type=button]{
+    #share-group input[type=button] {
       position: absolute;
       right: 0;
       top: 0;
@@ -173,7 +182,7 @@ lang: en
       border: 1px solid #999;
     }
 
-    #share-group input[type=button]:active{
+    #share-group input[type=button]:active {
       background: #e6ee9c;
     }
 
@@ -294,10 +303,20 @@ lang: en
           <input id="anim-delay" type="number" value="0.25">
         </div>
       </div>
+      <div class="row small">
+        <div class="explanation">
+          The delay (in seconds) between the start of the animation of each circles.
+        </div>
+      </div>
       <div class="row">
         <label>Animation length (seconds)</label>
         <div class="input">
           <input id="anim-length" type="number" value="4">
+        </div>
+      </div>
+      <div class="row small">
+        <div class="explanation">
+          The time (in seconds) it takes each circle to move from the start to the end of the line and back.
         </div>
       </div>
       <div class="row">
@@ -324,6 +343,7 @@ lang: en
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <script src="https://unpkg.com/@ungap/url-search-params"></script>
   <script id="rendered-js">
     $(document).ready(function () {
 
@@ -451,7 +471,7 @@ lang: en
       updateLink();
     }
 
-    function updateLink () {
+    function updateLink() {
       var link = "http://baselink/?";
       link += 'c=' + encodeURIComponent($('#circ-count').val());
       link += '&l=' + encodeURIComponent($('#anim-length').val());
