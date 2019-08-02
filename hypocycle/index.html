@@ -3,13 +3,14 @@ layout: empty
 title: Circular Animation
 lang: en
 ---
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=540px">
 
-  <title>Circular Animation</title>
+  <title>The Hypocycle</title>
   <style>
     @import url(https://fonts.googleapis.com/css?family=Comfortaa:700);
 
@@ -196,6 +197,12 @@ lang: en
       color: white;
     }
 
+    .github {
+      font-size: 10pt;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
     @-moz-keyframes slide {
       0% {
         transform: translateY(0);
@@ -346,6 +353,9 @@ lang: en
       </div>
     </div>
   </div>
+  <div class="github">
+    GitHub: <a href="https://github.com/not-dalia/the-hypocycle">not-dalia/the-hypocycle</a>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
   <script src="https://unpkg.com/@ungap/url-search-params"></script>
@@ -479,23 +489,13 @@ lang: en
     }
 
     function updateLink() {
-      var link = "http://relevant.space/circular-animation/?";
+      var link = "http://relevant.space/hypocycle/?";
       link += 'c=' + encodeURIComponent($('#circ-count').val());
       link += '&l=' + encodeURIComponent($('#anim-length').val());
       link += '&d=' + encodeURIComponent($('#anim-delay').val());
       link += '&e=' + encodeURIComponent($('#ease-type').find('option:selected').text());
       $('#share-link').val(link);
     }
-
-    var pageWidth, pageHeight;
-
-    var basePage = {
-      width: 400,
-      height: 400,
-      scale: 1,
-      scaleX: 1,
-      scaleY: 1
-    };
   </script>
 
 
