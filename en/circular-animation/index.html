@@ -1,0 +1,478 @@
+---
+layout: empty
+title: Circular Animation
+lang: en
+---
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=540px">
+
+  <title>CodePen - Circle Rotation</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Comfortaa:700);
+
+    body {
+      background: #f9f9f9;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      font-family: Comfortaa, Arial, sans-serif;
+      font-size: 1.8vmax;
+      flex-wrap: wrap-reverse;
+      align-items: center;
+    }
+
+    *:focus {
+      outline: none;
+    }
+
+    .main {
+      padding: 25px;
+      border-radius: 10px 10px 0 0;
+      max-width: 425px;
+
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #49a3bf;
+      margin-top: 7%;
+      border-radius: 10px;
+      box-shadow: 0 3px 2px 0px rgba(0, 0, 0, 0.2);
+      margin: 20px;
+      max-width: 450px;
+    }
+
+    .outer-circle {
+      background: #fff;
+      width: 400px;
+      height: 400px;
+      border-radius: 100%;
+      position: relative;
+    }
+
+    .line {
+      background: #6fc8e460;
+      width: 2px;
+      height: 400px;
+      position: absolute;
+      left: 199px;
+    }
+
+    .c {
+      background: #f44336;
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      animation-iteration-count: infinite;
+      animation-name: slide;
+    }
+
+    .inner-circle {
+      width: 30px;
+      height: 400px;
+      position: absolute;
+      left: 185px;
+    }
+
+    .controls {
+      padding: 25px;
+      color: #fff;
+      border-top: 3px dashed #fff;
+      width: 400px;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 5px 0;
+      flex-wrap: nowrap;
+      flex: 1;
+      align-items: center;
+    }
+
+    .input {
+      flex: 1;
+      text-align: right;
+    }
+
+    .row input {
+      margin: 0 5px;
+      font-size: 1.6vmax;
+    }
+
+    .row select {
+      margin: 0 5px;
+      font-size: 1.6vmax;
+      padding: 5px;
+    }
+
+    .row label {
+      display: table-cell;
+      padding: 5px;
+    }
+
+    .row input[type=button] {
+      padding: 10px;
+      margin: 5px;
+      background: white;
+      border-radius: 10px;
+      font-family: Comfortaa, Arial, sans-serif;
+      width: 30%;
+      white-space: normal;
+    }
+
+    .row input[type=text],
+    .row input[type=number],
+    .row select {
+      border: 1px solid #999;
+      border-radius: 10px;
+      padding: 5px;
+    }
+
+    .row input[type=number],
+    .row select {
+      width: 200px;
+    }
+
+    #share-link {
+      flex: 1;
+      margin: 0 5px;
+    }
+
+    #share-group {
+      flex: 1;
+      position: relative;
+      display: flex;
+    }
+
+    #share-group input{
+      height: 30px;
+      padding: 5px;
+      box-sizing: content-box;
+      flex: 1;
+    }
+
+    #share-group input[type=text]{
+      background: #efefef;
+      color: #222;
+    }
+
+    #share-group input[type=button]{
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 0 !important;
+      border-radius: 0 10px 10px 0;
+      border: 1px solid #999;
+    }
+
+    #share-group input[type=button]:active{
+      background: #e6ee9c;
+    }
+
+    .share-row {
+      border-top: 3px dashed #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 25px;
+      border-radius: 0 0 10px 10px;
+      width: 400px;
+      color: white;
+    }
+
+    @-moz-keyframes slide {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(370px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @-webkit-keyframes slide {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(370px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @-o-keyframes slide {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(370px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(370px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body translate="no">
+  <div class="container">
+    <div class="main">
+      <div class="outer-circle">
+        <div class="lines">
+        </div>
+        <div id="circles">
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="row">
+        <label>Ease type</label>
+        <div class="input">
+          <select id="ease-type">
+            <option value="linear">linear</option>
+            <option value="cubic-bezier(0.47, 0, 0.745, 0.715)">easeInSine</option>
+            <option value="cubic-bezier(0.39, 0.575, 0.565, 1)">easeOutSine</option>
+            <option value="cubic-bezier(0.445, 0.05, 0.55, 0.95)" selected="selected">easeInOutSine</option>
+            <option value="cubic-bezier(0.55, 0.085, 0.68, 0.53)">easeInQuad</option>
+            <option value="cubic-bezier(0.25, 0.46, 0.45, 0.94)">easeOutQuad</option>
+            <option value="cubic-bezier(0.455, 0.03, 0.515, 0.955)">easeInOutQuad</option>
+            <option value="cubic-bezier(0.55, 0.055, 0.675, 0.19)">easeInCubic</option>
+            <option value="cubic-bezier(0.215, 0.61, 0.355, 1)">easeOutCubic</option>
+            <option value="cubic-bezier(0.645, 0.045, 0.355, 1)">easeInOutCubic</option>
+            <option value="cubic-bezier(0.895, 0.03, 0.685, 0.22)">easeInQuart</option>
+            <option value="cubic-bezier(0.165, 0.84, 0.44, 1)">easeOutQuart</option>
+            <option value="cubic-bezier(0.77, 0, 0.175, 1)">easeInOutQuart</option>
+            <option value="cubic-bezier(0.755, 0.05, 0.855, 0.06)">easeInQuint</option>
+            <option value="cubic-bezier(0.23, 1, 0.32, 1)">easeOutQuint</option>
+            <option value="cubic-bezier(0.86, 0, 0.07, 1)">easeInOutQuint</option>
+            <option value="cubic-bezier(0.95, 0.05, 0.795, 0.035)">easeInExpo</option>
+            <option value="cubic-bezier(0.19, 1, 0.22, 1)">easeOutExpo</option>
+            <option value="cubic-bezier(1, 0, 0, 1)">easeInOutExpo</option>
+            <option value="cubic-bezier(0.6, 0.04, 0.98, 0.335)">easeInCirc</option>
+            <option value="cubic-bezier(0.075, 0.82, 0.165, 1)">easeOutCirc</option>
+            <option value="cubic-bezier(0.785, 0.135, 0.15, 0.86)">easeInOutCirc</option>
+            <option value="cubic-bezier(0.6, -0.28, 0.735, 0.045)">easeInBack</option>
+            <option value="cubic-bezier(0.175, 0.885, 0.32, 1.275)">easeOutBack</option>
+            <option value="cubic-bezier(0.68, -0.55, 0.265, 1.55)">easeInOutBack</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label>Animation delay (seconds)</label>
+        <div class="input">
+          <input id="anim-delay" type="number" value="0.25">
+        </div>
+      </div>
+      <div class="row">
+        <label>Animation length (seconds)</label>
+        <div class="input">
+          <input id="anim-length" type="number" value="4">
+        </div>
+      </div>
+      <div class="row">
+        <label>Number of inner circles</label>
+        <div class="input">
+          <input id="circ-count" type="number" value="8">
+        </div>
+      </div>
+      <div class="row">
+        <input id="anim-stop" type="button" value="Stop Animation">
+        <input id="anim-start" type="button" value="Start Animation">
+        <input id="anim-pause" type="button" value="Pause / Resume">
+      </div>
+    </div>
+    <div class="share-row">
+      <div class="row">
+        <label>Share</label>
+        <div id="share-group">
+          <input id="share-link" type="text" readonly onClick="this.setSelectionRange(0, this.value.length)">
+          <input id="copy-link" type="button" value="Copy">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <script id="rendered-js">
+    $(document).ready(function () {
+
+      $("#ease-type").change(changeEase);
+
+      $('#anim-delay').on('input', changeDelay);
+
+      $('#anim-length').on('input', changeLength);
+
+      $('#circ-count').on('input', changeCircleCount);
+
+      $('#anim-start').on('click', function () {
+        $('.c').css('animation-name', 'slide');
+      });
+
+      $('#anim-stop').on('click', function () {
+        $('.c').css('animation-name', 'none');
+      });
+
+      $('#anim-pause').on('click', function () {
+        var state = $('.c').css('animation-play-state');
+        if (state == "running") {
+          $('.c').css('animation-play-state', "paused");
+        } else {
+          $('.c').css('animation-play-state', "running");
+        }
+      });
+
+      $('#copy-link').on('click', function () {
+        document.getElementById('share-link').select();
+        document.execCommand("copy");
+      });
+
+      var circleCount = 8;
+      var animLength = 4;
+      var animDelay = 0.25;
+      var ease = "cubic-bezier(0.445, 0.05, 0.55, 0.95)";
+      var params = new URLSearchParams(window.location.search);
+      if (params.has('c') && !isNaN(params.get('c')) && params.get('c') >= 0) {
+        circleCount = params.get('c');
+      }
+      if (params.has('l') && !isNaN(params.get('l')) && params.get('l') >= 0) {
+        animLength = params.get('l');
+      }
+      if (params.has('d') && !isNaN(params.get('d'))) {
+        animDelay = params.get('d');
+      }
+      if (params.has('e')) {
+        var ease = $('#ease-type option').filter(function () {
+          return $(this).html() == params.get('e');
+        }).val() || ease;
+      }
+      $('#circ-count').val(circleCount);
+      $('#anim-delay').val(animDelay);
+      $('#anim-length').val(animLength);
+      $("#ease-type").val(ease);
+      changeCircleCount();
+      changeEase();
+      changeLength();
+      changeDelay();
+    })
+
+    function changeEase() {
+      $('.c').css("animation-timing-function", $("#ease-type").val());
+      updateLink();
+    }
+
+    function changeDelay() {
+      var animationName = $('.c').css('animation-name');
+      $('.c').css('animation-name', 'none');
+      $('.c').each(function (i) {
+        $(this).css("animation-delay", i * $('#anim-delay').val() + 's');
+      });
+      $('.c').css('animation-name', animationName);
+      updateLink();
+    }
+
+    function changeLength() {
+      var animationName = $('.c').css('animation-name');
+      $('.c').css('animation-name', 'none');
+      $('.c').each(function (i) {
+        $(this).css("animation-duration", $('#anim-length').val() + 's');
+      });
+      $('.c').css('animation-name', animationName);
+      updateLink();
+    }
+
+    function changeCircleCount() {
+      var circleCount = $('#circ-count').val();
+      if (circleCount < 0) circleCount = 0;
+      var state = $('.c').css('animation-play-state');
+      var duration = $('.c').css('animation-duration');
+      $('#circles').empty();
+      $('.lines').empty();
+      var seperationDegrees = 180 / circleCount;
+      for (var i = 0; i < circleCount; i++) {
+        var line = $("<div />", {
+          class: 'line',
+          css: {
+            'transform': 'rotate(' + i * seperationDegrees + 'deg)'
+          }
+        });
+
+        $('.lines').append(line);
+        var circle = $("<div />", {
+          class: 'inner-circle',
+          css: {
+            'transform': 'rotate(' + i * seperationDegrees + 'deg)'
+          }
+        });
+
+        var c = $("<div />", {
+          class: 'c',
+          css: {
+            'animation-delay': i * $('#anim-delay').val() + 's',
+            'animation-play-state': state,
+            'animation-duration': duration,
+            'animation-timing-function': $('#ease-type').val()
+          }
+        });
+
+        circle.append(c);
+        $('#circles').append(circle);
+      }
+      updateLink();
+    }
+
+    function updateLink () {
+      var link = "http://baselink/?";
+      link += 'c=' + encodeURIComponent($('#circ-count').val());
+      link += '&l=' + encodeURIComponent($('#anim-length').val());
+      link += '&d=' + encodeURIComponent($('#anim-delay').val());
+      link += '&e=' + encodeURIComponent($('#ease-type').find('option:selected').text());
+      $('#share-link').val(link);
+    }
+
+    var pageWidth, pageHeight;
+
+    var basePage = {
+      width: 400,
+      height: 400,
+      scale: 1,
+      scaleX: 1,
+      scaleY: 1
+    };
+  </script>
+
+
+</body>
+
+</html>
