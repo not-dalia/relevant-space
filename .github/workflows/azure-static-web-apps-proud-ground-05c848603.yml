@@ -19,6 +19,11 @@ jobs:
         uses: ruby/setup-ruby@v1.59.1
         with:
           ruby-version: 2.6
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 5
+        with:
+          limit-access-to-actor: true
       - name: Install dependencies
         run: bundle install
       - name: Jekyll build
